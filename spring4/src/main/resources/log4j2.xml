@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		<File name="File" fileName="C:/javawork/log/app.log">
+			<PatternLayout
+				pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+		</File>
+	</Appenders>
+
+	<Loggers>
+
+		<Logger name="org.apache.commons" level="DEBUG" additivity="false">
+			<appender-ref ref="Console" />
+		</Logger>
+
+		<Logger name="org.springframework" level="DEBUG" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<!--  SLF4J 형식일 경우 -->
+		<!-- Logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<Logger name="jdbc.sqlonly" level="DEBUG" additivity="false">
+			<appender-ref ref="Console" />
+		</Logger>
+
+		<Logger name="jdbc.audit" level="DEBUG" additivity="false">
+			<appender-ref ref="Console" />
+		</Logger>
+
+		<Logger name="jdbc.resultset" level="WARN" additivity="false">
+			<appender-ref ref="Console" />
+		</Logger>
+
+		<Logger name="jdbc.resultsettable" level="WARN"
+			additivity="false">
+			<appender-ref ref="Console" />
+		</Logger-->
+
+		<!-- LOG4J2 일 경우 marker에 해당하는것만 안찍도록 설정 -->
+		<Logger name="log4jdbc.log4j2" level="INFO" additivity="false">
+		  <MarkerFilter marker="LOG4JDBC_RESULTSET" onMatch="DENY" onMismatch="NEUTRAL"/>
+		  <appender-ref ref="Console"/>
+		</Logger>
+
+		<Logger name="base" level="DEBUG" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<Root level="INFO">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="File" />
+		</Root>
+	</Loggers>
+</Configuration>

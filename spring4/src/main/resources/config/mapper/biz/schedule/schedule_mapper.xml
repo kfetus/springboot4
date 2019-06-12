@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="base.biz.schedule.impl.MyScheduleMapper">
+    <select id="selectScheduleList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT B.YYYYMMDD,B.DT,B.DAY,A.SCH 
+		  FROM ( SELECT YYYYMMDD
+		                , LISTAGG(HH ||' : '||SCHEDULE, ' ') WITHIN GROUP(ORDER BY HH) AS SCH
+		            FROM MY_SCHEDULE 
+		            GROUP BY YYYYMMDD 
+		    ) A 
+		    , (SELECT A.YYYYMMDD,
+		               A.DT,
+		                CASE WHEN A.DT=1 THEN '일요일'
+		                     WHEN A.DT=2 THEN '월요일'
+		                     WHEN A.DT=3 THEN '화요일'
+		                     WHEN A.DT=4 THEN '수요일'
+		                     WHEN A.DT=5 THEN '목요일'
+		                     WHEN A.DT=6 THEN '금요일'
+		                     WHEN A.DT=7 THEN '토요일'
+		                ELSE ''
+		        END AS DAY
+		        FROM (
+		        SELECT TO_CHAR(SYSDATE,'YYYYMM')||LPAD(LEVEL,2,0) AS YYYYMMDD
+		                        , TO_CHAR(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM')||LPAD(LEVEL,2,0)),'D') DT
+		                FROM DUAL
+		                CONNECT BY LEVEL &lt;= TO_CHAR(LAST_DAY(SYSDATE),'DD')
+		        ) A
+		        ) B
+		 WHERE A.YYYYMMDD(+) = B.YYYYMMDD
+		 <if test="yyyymmdd != null and yyyymmdd != ''">
+		   AND A.YYYYMMDD = #{yyyymmdd}
+		 </if>
+		 ORDER BY B.YYYYMMDD
+    </select>
+    
+	<insert id="insertSchedule" parameterType="java.util.HashMap">
+		INSERT INTO MY_SCHEDULE (
+			   YYYYMMDD, 
+			   HH, 
+			   SCHEDULE, 
+			   REG_ID, 
+			   REG_DT, 
+			   CNG_DT) 
+		VALUES ( 
+				 #{YYYYMMDD},
+				 #{HH},
+				 #{SCHEDULE},
+				 #{REG_ID},
+				 SYSDATE,
+				 SYSDATE 
+				)
+	</insert>    
+
+	<select id="selectScheduleView" parameterType="String" resultType="java.util.HashMap">
+		SELECT YYYYMMDD
+		       , HH
+		       , SCHEDULE
+		       , REG_ID
+		  FROM OJH.MY_SCHEDULE
+		 WHERE YYYYMMDD = #{pk}
+	</select>
+
+	<update id="updateSchedule">
+		UPDATE MY_SCHEDULE
+		SET    YYYYMMDD = #{YYYYMMDD},
+		       HH       = #{HH},
+		       SCHEDULE = #{SCHEDULE},
+		       REG_ID   = #{REG_ID},
+		       CNG_DT   = SYSDATE
+		WHERE  YYYYMMDD = #{YYYYMMDD}
+		AND    HH       = #{HH}
+	</update>
+	
+	<delete id="deleteSchedule">
+		DELETE FROM MY_SCHEDULE
+		WHERE  YYYYMMDD = #{YYYYMMDD}
+		AND    HH       = #{HH}	
+	</delete>
+</mapper>
