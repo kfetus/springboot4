@@ -9,7 +9,7 @@
 <title>목록</title>
 <link type="text/css" rel="stylesheet" href="<c:url value='/css/common.css'/>" />
 
-<script src="<c:url value='/js/jquery-3.3.1.min.js'/>"></script>
+<script src="<c:url value='/js/jquery-3.4.1.min.js'/>"></script>
 
 
 <script type="text/javaScript" defer="defer">
