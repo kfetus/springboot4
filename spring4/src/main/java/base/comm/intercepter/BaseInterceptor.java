@@ -24,7 +24,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             	String paramKey = (String) en.nextElement();            	
             	log.debug("key : " + paramKey +";value="+request.getParameter(paramKey));
             }
-/*
+
             log.debug("###### Attribute ######");
     		Enumeration<?> attrNames = request.getAttributeNames();
     		while (attrNames.hasMoreElements()) {
@@ -32,7 +32,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             	log.debug("key : " + attrName +";value="+request.getAttribute(attrName));
 
     		}
-*/
+
     		log.debug("###### session ######");
     		Enumeration<?> sessNames = request.getSession().getAttributeNames();
     		while (sessNames.hasMoreElements()) {
