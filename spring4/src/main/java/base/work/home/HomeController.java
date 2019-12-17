@@ -15,7 +15,7 @@ public class HomeController {
 
 	protected Logger log = LogManager.getLogger(HomeController.class);
 	 
-	@RequestMapping(value = "/base.do")
+	@RequestMapping(value = "/base")
 	public String home(Locale locale, Model model) {
 		log.info("Welcome home! The client locale is {}.");
 		log.debug("한글 로그 테스트"+model);

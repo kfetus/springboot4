@@ -24,7 +24,7 @@ public class MyScheduleController {
 	@Resource(name="myScheduleService")
 	private MyScheduleService myScheduleService;
 	
-	@RequestMapping(value = "/scheduleList.do")
+	@RequestMapping(value = "/scheduleList")
 	public ModelAndView scheduleList(@RequestParam Map<String,Object> map) throws Exception {
 		log.info("Welcome home! The client locale is {}.",Locale.KOREA);
 		log.debug("한글 로그 테스트"+map);
@@ -37,7 +37,7 @@ public class MyScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/scheduleInsertView.do")
+	@RequestMapping(value = "/scheduleInsertView")
 	public String scheduleInsertView(@RequestParam Map<String,Object> map, Model model) throws Exception {
 		log.debug("등록 화면 이동"+map);
 		
@@ -46,17 +46,17 @@ public class MyScheduleController {
 		return "biz/schedule/scheduleInsert";
 	}
 
-	@RequestMapping(value = "/scheduleInsert.do")
+	@RequestMapping(value = "/scheduleInsert")
 	public String scheduleInsert(@RequestParam Map<String,Object> map) throws Exception {
 		log.debug("등록 테스트"+map);
 		
 		myScheduleService.insertSchedule(map);
 
-//		return "forward:/schedule/scheduleList.do"; request,response 공유
-		return "redirect:/schedule/scheduleList.do"; //새로운 request,response 생성
+//		return "forward:/schedule/scheduleList"; request,response 공유
+		return "redirect:/schedule/scheduleList"; //새로운 request,response 생성
 	}
 
-	@RequestMapping(value = "/scheduleView.do")
+	@RequestMapping(value = "/scheduleView")
 	public String scheduleView(@RequestParam Map<String,Object> map, Model model) throws Exception {
 		log.debug("view start="+map);
 		
@@ -69,7 +69,7 @@ public class MyScheduleController {
 		return "biz/schedule/scheduleView";
 	}
 	
-	@RequestMapping(value = "/scheduleUpdate.do")
+	@RequestMapping(value = "/scheduleUpdate")
 	@ResponseBody
 	public Map<String,Object> scheduleUpdate(@RequestParam Map<String,Object> map, Model model) throws Exception {
 		log.debug("수정 테스트"+map);
@@ -78,7 +78,7 @@ public class MyScheduleController {
 		return map;
 	}
 
-	@RequestMapping(value = "/scheduleDelete.do")
+	@RequestMapping(value = "/scheduleDelete")
 	public String scheduleDelete(@RequestParam Map<String,Object> map, Model model) throws Exception {
 		log.debug("수정 테스트"+map);
 		myScheduleService.deleteSchedule(map);
