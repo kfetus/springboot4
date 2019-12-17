@@ -16,7 +16,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-            log.debug("======================================          START         ======================================");
+            log.debug("======================================          PRE START         ======================================");
             log.debug(" Request URI \t:  " + request.getRequestURI());
             log.debug("###### parameter ######");
             Enumeration<?> en = request.getParameterNames();
@@ -24,7 +24,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             	String paramKey = (String) en.nextElement();            	
             	log.debug("key : " + paramKey +";value="+request.getParameter(paramKey));
             }
-
+/*
             log.debug("###### Attribute ######");
     		Enumeration<?> attrNames = request.getAttributeNames();
     		while (attrNames.hasMoreElements()) {
@@ -32,21 +32,21 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             	log.debug("key : " + attrName +";value="+request.getAttribute(attrName));
 
     		}
-
+*/
     		log.debug("###### session ######");
     		Enumeration<?> sessNames = request.getSession().getAttributeNames();
     		while (sessNames.hasMoreElements()) {
     			String sessName = (String) sessNames.nextElement();
             	log.debug("key : " + sessName +";value="+request.getSession().getAttribute(sessName));
     		}
-
+    		log.debug("======================================          PRE START         ======================================");
         return super.preHandle(request, response, handler);
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (log.isDebugEnabled()) {
-            log.debug("======================================           END          ======================================\n");
+            log.debug("======================================           POST END          ======================================\n");
         }
     }
 }

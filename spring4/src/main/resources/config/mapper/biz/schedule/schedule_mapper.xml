@@ -21,11 +21,11 @@
 		                ELSE ''
 		        END AS DAY
 		        FROM (
-		        SELECT TO_CHAR(SYSDATE,'YYYYMM')||LPAD(LEVEL,2,0) AS YYYYMMDD
-		                        , TO_CHAR(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM')||LPAD(LEVEL,2,0)),'D') DT
-		                FROM DUAL
-		                CONNECT BY LEVEL &lt;= TO_CHAR(LAST_DAY(SYSDATE),'DD')
-		        ) A
+			        SELECT TO_CHAR(SYSDATE,'YYYYMM')||LPAD(LEVEL,2,0) AS YYYYMMDD
+			               , TO_CHAR(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM')||LPAD(LEVEL,2,0)),'D') DT
+			          FROM DUAL
+			       CONNECT BY LEVEL &lt;= TO_CHAR(LAST_DAY(SYSDATE),'DD')
+			        ) A
 		        ) B
 		 WHERE A.YYYYMMDD(+) = B.YYYYMMDD
 		 <if test="yyyymmdd != null and yyyymmdd != ''">
@@ -57,7 +57,7 @@
 		       , HH
 		       , SCHEDULE
 		       , REG_ID
-		  FROM OJH.MY_SCHEDULE
+		  FROM MY_SCHEDULE
 		 WHERE YYYYMMDD = #{pk}
 	</select>
 

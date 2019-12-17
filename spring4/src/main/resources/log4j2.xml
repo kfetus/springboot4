@@ -44,7 +44,7 @@
 		</Logger-->
 
 		<!-- LOG4J2 일 경우 marker에 해당하는것만 안찍도록 설정 -->
-		<Logger name="log4jdbc.log4j2" level="INFO" additivity="false">
+		<Logger name="log4jdbc.log4j2" level="DEBUG" additivity="false">
 		  <MarkerFilter marker="LOG4JDBC_RESULTSET" onMatch="DENY" onMismatch="NEUTRAL"/>
 		  <appender-ref ref="Console"/>
 		</Logger>
