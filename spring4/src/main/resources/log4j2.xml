@@ -2,12 +2,10 @@
 <Configuration>
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout
-				pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+			<PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss} [%t] %-5level %logger - %msg%n" />
 		</Console>
 		<File name="File" fileName="C:/javawork/log/app.log">
-			<PatternLayout
-				pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+			<PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss} [%t] %-5level %logger - %msg%n" />
 		</File>
 	</Appenders>
 
