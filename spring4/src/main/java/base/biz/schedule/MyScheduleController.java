@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import base.biz.schedule.impl.MyScheduleServiceImpl;
+
 @RequestMapping(value = "/schedule")
 @Controller
 public class MyScheduleController {
@@ -22,7 +24,7 @@ public class MyScheduleController {
 	protected Logger log = LogManager.getLogger(this.getClass());
 	
 	@Resource(name="myScheduleService")
-	private MyScheduleService myScheduleService;
+	private MyScheduleServiceImpl myScheduleService;
 	
 	@RequestMapping(value = "/scheduleList")
 	public ModelAndView scheduleList(@RequestParam Map<String,Object> map) throws Exception {
@@ -37,6 +39,23 @@ public class MyScheduleController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/scheduleList2")
+	public ModelAndView scheduleList2(@RequestParam Map<String,Object> map) throws Exception {
+		log.info("scheduleList2.",Locale.KOREA);
+		log.debug("한글 로그 테스트"+map);
+		
+		ModelAndView mv = new ModelAndView();
+		List<Map<String,Object>> returnList = myScheduleService.selectScheduleList(map); 
+		mv.addObject("list", returnList );
+		mv.addAllObjects(map);
+		
+		mv.addObject("pageTitle", "타이틀 자리" );
+		mv.setViewName("biz/schedule/scheduleList2.tiles");
+		log.debug("##############"+returnList);
+		return mv;
+	}	
+	
+	
 	@RequestMapping(value = "/scheduleInsertView")
 	public String scheduleInsertView(@RequestParam Map<String,Object> map, Model model) throws Exception {
 		log.debug("등록 화면 이동"+map);
