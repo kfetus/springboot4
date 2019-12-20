@@ -165,7 +165,10 @@
 		$.ajax({
 			url : "<c:url value='/sign/canvasInsert'/>"
 			, type : 'POST'
+			, async: true
 			, data : { "id" : "홍길동","dataUrl":dataUrl }
+			, contentType : "application/json; charset=utf-8"
+			, dataType : "text"
 			, success : function(data){
 				alert(data);
 			}, error : function(){

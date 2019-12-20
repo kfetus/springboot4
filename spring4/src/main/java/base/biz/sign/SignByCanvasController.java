@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import base.comm.data.JsonResModel;
+
 @RequestMapping(value = "/sign")
 @Controller
 public class SignByCanvasController {
@@ -31,15 +33,15 @@ public class SignByCanvasController {
 	
 	@RequestMapping(value = "/canvasInsert")
 	@ResponseBody
-	public ModelAndView canvasInsert(@RequestParam Map<String,Object> map) throws Exception {
+	public JsonResModel canvasInsert(@RequestParam Map<String,Object> map) throws Exception {
 		log.debug("############## START canvasInsert ############## "+map);
 		
-		ModelAndView mv = new ModelAndView();
+		JsonResModel jsonModel = new JsonResModel();
 		
-		mv.addObject("pageTitle", "사인 저장" );
-		mv.setViewName("biz/sign/canvasView.tiles");
+		
+		
 		log.debug("############## END canvasInsert ############## ");
-		return mv;
+		return jsonModel;
 	}
 	
 }
