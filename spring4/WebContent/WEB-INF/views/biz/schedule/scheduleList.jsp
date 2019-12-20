@@ -14,20 +14,19 @@
 <script type="text/javaScript" defer="defer">
 
 	function fnSearch() {
-//		document.searchForm.pageIndex.value = pageNo;
-		document.searchForm.action = "<c:url value='/schedule/scheduleList.do'/>";
-		document.searchForm.submit();
+		$("#searchForm").attr("action", "<c:url value='/schedule/scheduleList'/>");
+		$("#searchForm").submit();
 	}
 	
 	function fnInsert() {
-		document.searchForm.action = "<c:url value='/schedule/scheduleInsertView.do'/>";
-		document.searchForm.submit();
+		$("#searchForm").attr("action", "<c:url value='/schedule/scheduleInsertView'/>");
+		$("#searchForm").submit();
 	}
 
 	function fnDetailView(pk) {
 		$("#pk").val(pk);
-		document.searchForm.action = "<c:url value='/schedule/scheduleView.do'/>";
-		document.searchForm.submit();
+		$("#searchForm").attr("action", "<c:url value='/schedule/scheduleView'/>");
+		$("#searchForm").submit();
 	}
 	
 </script>
