@@ -24,7 +24,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
             	String paramKey = (String) en.nextElement();            	
             	log.debug("key : " + paramKey +";value="+request.getParameter(paramKey));
             }
-/*
+/**
             log.debug("###### Attribute ######");
     		Enumeration<?> attrNames = request.getAttributeNames();
     		while (attrNames.hasMoreElements()) {
@@ -33,13 +33,21 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 
     		}
 */
+            log.debug("###### Header ######");
+    		Enumeration<?> headerNames = request.getHeaderNames();
+    		while (headerNames.hasMoreElements()) {
+    			String headerName = (String) headerNames.nextElement();
+            	log.debug("key : " + headerName +";value="+request.getAttribute(headerName));
+
+    		}
+    		
     		log.debug("###### session ######");
     		Enumeration<?> sessNames = request.getSession().getAttributeNames();
     		while (sessNames.hasMoreElements()) {
     			String sessName = (String) sessNames.nextElement();
             	log.debug("key : " + sessName +";value="+request.getSession().getAttribute(sessName));
     		}
-    		log.debug("======================================          PRE START         ======================================");
+    		log.debug("======================================          PRE END         ======================================");
         return super.preHandle(request, response, handler);
     }
 

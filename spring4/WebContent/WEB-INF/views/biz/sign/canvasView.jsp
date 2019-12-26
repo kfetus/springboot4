@@ -160,20 +160,26 @@
 	    var dataUrl = canvas.toDataURL();
 	    sigText.innerHTML = dataUrl;
 	    sigImage.setAttribute("src", dataUrl);
-	    
+
+	    var testData = {
+	    	    id: "123",
+	    	    name: "123",
+	    	    testTags: [{id: "1111", tag: "2222"}]
+	    	};
 	    
 		$.ajax({
-			url : "<c:url value='/sign/canvasInsert'/>"
-			, type : 'POST'
-			, async: true
-			, data : { "id" : "홍길동","dataUrl":dataUrl }
-			, contentType : "application/json; charset=utf-8"
-			, dataType : "text"
-			, success : function(data){
+			url: "<c:url value='/sign/canvasInsert'/>"
+			, type: "POST"
+			, dataType: "json"
+//			, async: true
+//			, contentType: "application/json; charset=UTF-8;"
+			, data: { "id":"홍길동","dataUrl":dataUrl }
+			, success: function(data){
+				console.log(data);
 				alert(data);
-			}, error : function(){
+			}, error: function(){
 				alert('error');
-			}, complete : function(){
+			}, complete: function(){
 			}
 		});
 	    

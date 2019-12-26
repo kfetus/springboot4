@@ -1,6 +1,9 @@
 package base.biz.sign;
 
+import java.util.Enumeration;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,15 +36,31 @@ public class SignByCanvasController {
 	
 	@RequestMapping(value = "/canvasInsert")
 	@ResponseBody
-	public JsonResModel canvasInsert(@RequestParam Map<String,Object> map) throws Exception {
+	public JsonResModel canvasInsert(@RequestParam Map<String,String> map) throws Exception {
 		log.debug("############## START canvasInsert ############## "+map);
 		
 		JsonResModel jsonModel = new JsonResModel();
-		
-		
-		
+
 		log.debug("############## END canvasInsert ############## ");
 		return jsonModel;
 	}
+
+	@RequestMapping(value = "/jsonTest")
+	@ResponseBody
+	public JsonResModel jsonTest(HttpServletRequest request) throws Exception {
+		log.debug("############## START jsonTest ############## ");
+		
+        Enumeration<?> en = request.getParameterNames();
+        while(en.hasMoreElements()) {
+        	String paramKey = (String) en.nextElement();            	
+        	log.debug("key : " + paramKey +";value="+request.getParameter(paramKey));
+        }
+		
+		JsonResModel jsonModel = new JsonResModel();
+		
+		log.debug("############## END jsonTest ############## ");
+		return jsonModel;
+	}
+	
 	
 }
