@@ -2,11 +2,13 @@ package base.biz.sign;
 
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,11 +22,14 @@ import base.comm.data.JsonResModel;
 public class SignByCanvasController {
 
 	protected Logger log = LogManager.getLogger(this.getClass());
+
+	@Autowired
+	private Properties properties;
 	
 	@RequestMapping(value = "/canvasView")
 	public ModelAndView canvasView(@RequestParam Map<String,Object> map) throws Exception {
 		log.debug("############## START canvasView ############## ");
-		
+		log.debug(properties.getProperty("test"));
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("pageTitle", "사인 테스트" );

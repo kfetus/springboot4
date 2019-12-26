@@ -9,4 +9,12 @@
        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
+	<bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>				
+				<value>classpath:/config/properties/#{systemProperties['spring.profiles.active']}.properties</value>
+			</list>
+		</property>
+	</bean>
+
 </beans>
