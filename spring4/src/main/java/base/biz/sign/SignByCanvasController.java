@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import base.comm.data.JsonResModel;
+import base.comm.property.MessagePropertyService;
+import base.comm.property.SystemPropertyService;
 
 @RequestMapping(value = "/sign")
 @Controller
@@ -25,13 +27,16 @@ public class SignByCanvasController {
 	protected Logger log = LogManager.getLogger(this.getClass());
 
 	@Autowired
-	private Properties properties;
+	private SystemPropertyService sysProperties;
+	
+	@Autowired
+	private MessagePropertyService messProperties;
 	
 	@RequestMapping(value = "/canvasView")
 	public ModelAndView canvasView(@RequestParam Map<String,Object> map) throws Exception {
 		log.debug("############## START canvasView ############## ");
-		log.debug(properties.getProperty("system.test"));
-		log.debug(properties.getProperty("message.test"));
+		log.debug(sysProperties.getTest());
+		log.debug(messProperties.getTest());
 		ModelAndView mv = new ModelAndView();
 		
 		Properties properties = System.getProperties();
