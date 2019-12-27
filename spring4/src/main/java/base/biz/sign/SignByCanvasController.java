@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import base.comm.data.JsonResModel;
 import base.comm.property.MessagePropertyService;
 import base.comm.property.SystemPropertyService;
+import base.comm.util.DateUtil;
 
 @RequestMapping(value = "/sign")
 @Controller
@@ -39,6 +40,9 @@ public class SignByCanvasController {
 		log.debug("############## START canvasView ############## ");
 		log.debug(sysProperties.getTest());
 		log.debug(messProperties.getTest());
+		
+		log.debug(DateUtil.getToday());
+		
 		ModelAndView mv = new ModelAndView();
 /*		
 		Properties properties = System.getProperties();
