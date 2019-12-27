@@ -1,12 +1,12 @@
 package base.comm.data;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class JsonResModel {
 
 	private String status = "200";
 	private String msg;
-	private HashMap<String,String> data;
+	private Map<String,String> data;
 	
 	public String getStatus() {
 		return status;
@@ -20,10 +20,10 @@ public class JsonResModel {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	public HashMap<String, String> getData() {
+	public Map<String, String> getData() {
 		return data;
 	}
-	public void setData(HashMap<String, String> data) {
+	public void setData(Map<String, String> data) {
 		this.data = data;
 	}
 	@Override

@@ -173,7 +173,7 @@
 			, dataType: "json"
 //			, async: true
 //			, contentType: "application/json; charset=UTF-8;"
-			, data: { "id":"홍길동","dataUrl":dataUrl }
+			, data: { "id":"1122541","dataUrl":dataUrl }
 			, success: function(data){
 				console.log(data);
 				alert(data);

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+CREATE TABLE SIGNDATA_SAVE (
+	SIGN_KEY VARCHAR2(20) NOT NULL, 
+	SCHEDULE CLOB, 
+	REG_ID VARCHAR2(20) DEFAULT 'SYSTEM', 
+	REG_DT DATE DEFAULT SYSDATE, 
+	CNG_DT DATE
+);
+
+ALTER TABLE SIGNDATA_SAVE ADD CONSTRAINT PK_SIGNDATA_SAVE PRIMARY KEY (SIGN_KEY);
+
+ -->
+<mapper namespace="base.biz.sign.SignByCanvasMapper">
+    <select id="selectSignList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT SIGN_KEY
+			   , SCHEDULE
+			   , REG_ID
+			   , REG_DT
+			   , CNG_DT
+		FROM SIGNDATA_SAVE
+    </select>
+    
+	<insert id="insertSign" parameterType="String">
+		INSERT INTO SIGNDATA_SAVE (
+				SIGN_KEY
+				, SCHEDULE
+				, REG_ID
+				, REG_DT
+				, CNG_DT
+				)
+		VALUES(
+				#{signKey}
+				, NVL(#{signData:VARCHAR}, EMPTY_CLOB())
+				, 'SYSTEM'
+				, SYSDATE
+				, SYSDATE
+			)
+	</insert>    
+
+
+</mapper>

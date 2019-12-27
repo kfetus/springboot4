@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+CREATE TABLE MY_SCHEDULE(
+	YYYYMMDD VARCHAR2(8) NOT NULL, 
+	HH VARCHAR2(2), 
+	MM VARCHAR2(2),
+	SCHEDULE VARCHAR2(4000), 
+	REG_ID VARCHAR2(20) DEFAULT 'SYSTEM', 
+	REG_DT DATE DEFAULT SYSDATE, 
+	CNG_DT DATE
+);
 
+ALTER TABLE MY_SCHEDULE ADD CONSTRAINT PK_MY_SCHEDULE PRIMARY KEY (YYYYMMDD,HH,MM);
+ -->
 <mapper namespace="base.biz.schedule.impl.MyScheduleMapper">
     <select id="selectScheduleList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT B.YYYYMMDD,B.DT,B.DAY,A.SCH 
