@@ -2,6 +2,7 @@ package base.biz.sign;
 
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +30,14 @@ public class SignByCanvasController {
 	@RequestMapping(value = "/canvasView")
 	public ModelAndView canvasView(@RequestParam Map<String,Object> map) throws Exception {
 		log.debug("############## START canvasView ############## ");
-		log.debug(properties.getProperty("test"));
+		log.debug(properties.getProperty("system.test"));
+		log.debug(properties.getProperty("message.test"));
 		ModelAndView mv = new ModelAndView();
+		
+		Properties properties = System.getProperties();
+		for(Entry<Object, Object> entry : properties.entrySet()) {
+			System.out.println(entry.getKey()+"="+entry.getValue());
+		}
 		
 		mv.addObject("pageTitle", "사인 테스트" );
 		mv.setViewName("biz/sign/canvasView.tiles");

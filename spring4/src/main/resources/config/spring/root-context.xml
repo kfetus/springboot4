@@ -12,7 +12,8 @@
 	<bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations">
 			<list>				
-				<value>classpath:/config/properties/#{systemProperties['spring.profiles.active']}.properties</value>
+				<value>classpath:/config/properties/#{systemProperties['spring.profiles.active']}/system.properties</value>
+				<value>classpath:/config/properties/#{systemProperties['spring.profiles.active']}/message.properties</value>
 			</list>
 		</property>
 	</bean>
