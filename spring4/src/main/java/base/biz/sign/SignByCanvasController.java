@@ -72,10 +72,32 @@ public class SignByCanvasController {
 		return jsonModel;
 	}
 
-	@RequestMapping(value = "/jsonTest")
+	@RequestMapping(value = "/jsonRequestBody")
 	@ResponseBody
-	public JsonResModel jsonTest(@RequestBody Map<String,String> map, HttpServletRequest request) throws Exception {
-		log.debug("############## START jsonTest ############## "+map);
+	public JsonResModel jsonRequestBody(@RequestBody Map<String,String> map) throws Exception {
+		log.debug("############## START jsonRequestBody ############## "+map);
+		
+		JsonResModel jsonModel = new JsonResModel();
+		
+		log.debug("############## END jsonRequestBody ############## ");
+		return jsonModel;
+	}
+	
+	@RequestMapping(value = "/jsonRequestParam")
+	@ResponseBody
+	public JsonResModel jsonRequestParam(@RequestParam Map<String,String> map) throws Exception {
+		log.debug("############## START jsonRequestParam ############## "+map);
+		
+		JsonResModel jsonModel = new JsonResModel();
+		
+		log.debug("############## END jsonRequestParam ############## ");
+		return jsonModel;
+	}
+	
+	@RequestMapping(value = "/jsonServletRequest")
+	@ResponseBody
+	public JsonResModel jsonServletRequest(HttpServletRequest request) throws Exception {
+		log.debug("############## START jsonServletRequest ############## ");
         Enumeration<?> en = request.getParameterNames();
         while(en.hasMoreElements()) {
         	String paramKey = (String) en.nextElement();            	
@@ -84,9 +106,7 @@ public class SignByCanvasController {
 		
 		JsonResModel jsonModel = new JsonResModel();
 		
-		log.debug("############## END jsonTest ############## ");
+		log.debug("############## END jsonServletRequest ############## ");
 		return jsonModel;
-	}
-	
-	
+	}	
 }

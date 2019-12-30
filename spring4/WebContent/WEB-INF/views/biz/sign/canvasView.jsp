@@ -8,7 +8,9 @@
 		<div class="row">
 			<button class="btn btn-primary" id="sig-submitBtn">Submit Signature</button>
 			<button class="btn btn-default" id="sig-clearBtn">Clear Signature</button>
-			<button class="btn btn-default" id="sig-ajaxBtn">AJAX TEST</button>
+			<button class="btn btn-default" id="sig-ajaxBtn">jsonRequestBody</button>
+			<button class="btn btn-default" id="sig-ajaxBtn2">jsonRequestParam</button>
+			<button class="btn btn-default" id="sig-ajaxBtn3">jsonServletRequest</button>
 		</div>
 
 		<div class="col-md-12">
@@ -31,9 +33,10 @@
 <script type="text/javaScript" defer="defer">
 
 $(function() {
+	
     $("#sig-ajaxBtn").on( "click", function() {
 		$.ajax({
-			url: "<c:url value='/sign/jsonTest'/>"
+			url: "<c:url value='/sign/jsonRequestBody'/>"
 			, type: "POST"
 			, dataType: "json"
 			, async: true
@@ -48,6 +51,49 @@ $(function() {
 			}
 		});    	
     });
+
+    /**
+    	JSON.stringify 있고 없고의 차이는 key,value를 RequestParameter로 확인하면 됨
+    	contentType셋팅도 안해서 기본 application/x-www-form-urlencoded; charset=UTF-8로 전송되야 key,value가 확인됨 
+    */
+    $("#sig-ajaxBtn2").on( "click", function() {
+		$.ajax({
+			url: "<c:url value='/sign/jsonRequestParam'/>"
+			, type: "POST"
+			, dataType: "json"
+			, async: true
+//			, contentType: "application/json;charset=UTF-8;"
+//			, data: JSON.stringify({ "id":"test","dataUrl":"sssss" })
+			, data: { "id":"test","dataUrl":"sssss" }
+			, success: function(data){
+				console.log(data);
+				alert(data);
+			}, error: function(){
+				alert('error');
+			}, complete: function(){
+			}
+		});    	
+    });
+
+    $("#sig-ajaxBtn3").on( "click", function() {
+		$.ajax({
+			url: "<c:url value='/sign/jsonServletRequest'/>"
+			, type: "POST"
+			, dataType: "json"
+			, async: true
+//			, contentType: "application/json;charset=UTF-8;"
+//			, data: JSON.stringify({ "id":"test","dataUrl":"sssss" })
+			, data: { "id":"asdfasd","dataUrl":"sssss" }
+			, success: function(data){
+				console.log(data);
+				alert(data);
+			}, error: function(){
+				alert('error');
+			}, complete: function(){
+			}
+		});    	
+    });
+
 });
 
 (function() {
