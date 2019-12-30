@@ -8,6 +8,7 @@
 		<div class="row">
 			<button class="btn btn-primary" id="sig-submitBtn">Submit Signature</button>
 			<button class="btn btn-default" id="sig-clearBtn">Clear Signature</button>
+			<button class="btn btn-default" id="sig-ajaxBtn">AJAX TEST</button>
 		</div>
 
 		<div class="col-md-12">
@@ -28,6 +29,26 @@
 }
 </style>
 <script type="text/javaScript" defer="defer">
+
+$(function() {
+    $("#sig-ajaxBtn").on( "click", function() {
+		$.ajax({
+			url: "<c:url value='/sign/jsonTest'/>"
+			, type: "POST"
+			, dataType: "json"
+			, async: true
+			, contentType: "application/json;charset=UTF-8;"
+			, data: JSON.stringify({ "id":"test","dataUrl":"sssss" })
+			, success: function(data){
+				console.log(data);
+				alert(data);
+			}, error: function(){
+				alert('error');
+			}, complete: function(){
+			}
+		});    	
+    });
+});
 
 (function() {
 	  window.requestAnimFrame = (function(callback) {
@@ -171,9 +192,9 @@
 			url: "<c:url value='/sign/canvasInsert'/>"
 			, type: "POST"
 			, dataType: "json"
-//			, async: true
-//			, contentType: "application/json; charset=UTF-8;"
-			, data: { "id":"1122541","dataUrl":dataUrl }
+			, async: true
+			, contentType: "application/json; charset=UTF-8;"
+			, data: JSON.stringify({ "id":"1222541","dataUrl":dataUrl })
 			, success: function(data){
 				console.log(data);
 				alert(data);

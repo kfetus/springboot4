@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,7 +60,7 @@ public class SignByCanvasController {
 	
 	@RequestMapping(value = "/canvasInsert")
 	@ResponseBody
-	public JsonResModel canvasInsert(@RequestParam HashMap<String,String> map) throws Exception {
+	public JsonResModel canvasInsert(@RequestBody HashMap<String,String> map) throws Exception {
 		log.debug("############## START canvasInsert ############## "+map);
 		
 		signByCanvasService.insertSign(map.get("id"), map.get("dataUrl"));
@@ -73,9 +74,8 @@ public class SignByCanvasController {
 
 	@RequestMapping(value = "/jsonTest")
 	@ResponseBody
-	public JsonResModel jsonTest(HttpServletRequest request) throws Exception {
-		log.debug("############## START jsonTest ############## ");
-		
+	public JsonResModel jsonTest(@RequestBody Map<String,String> map, HttpServletRequest request) throws Exception {
+		log.debug("############## START jsonTest ############## "+map);
         Enumeration<?> en = request.getParameterNames();
         while(en.hasMoreElements()) {
         	String paramKey = (String) en.nextElement();            	
