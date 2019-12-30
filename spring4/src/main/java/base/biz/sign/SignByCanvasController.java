@@ -20,7 +20,11 @@ import base.comm.data.JsonResModel;
 import base.comm.property.MessagePropertyService;
 import base.comm.property.SystemPropertyService;
 import base.comm.util.DateUtil;
-
+/**
+ * 캔바스 사인 테스트
+ * @author naru
+ *
+ */
 @RequestMapping(value = "/sign")
 @Controller
 public class SignByCanvasController {
@@ -38,7 +42,7 @@ public class SignByCanvasController {
 	
 	@RequestMapping(value = "/canvasView")
 	public ModelAndView canvasView(@RequestParam Map<String,Object> map) throws Exception {
-		log.debug("############## START canvasView ############## ");
+		log.debug("############## START canvasView ##############");
 		log.debug(sysProperties.getTest());
 		log.debug(messProperties.getTest());
 		
@@ -53,7 +57,7 @@ public class SignByCanvasController {
 */		
 		mv.addObject("pageTitle", "사인 테스트" );
 		mv.setViewName("biz/sign/canvasView.tiles");
-		log.debug("############## END canvasView ############## ");
+		log.debug("############## END canvasView ##############");
 		return mv;
 	}
 
@@ -61,43 +65,46 @@ public class SignByCanvasController {
 	@RequestMapping(value = "/canvasInsert")
 	@ResponseBody
 	public JsonResModel canvasInsert(@RequestBody HashMap<String,String> map) throws Exception {
-		log.debug("############## START canvasInsert ############## "+map);
+		log.debug("############## START canvasInsert ##############"+map);
 		
-		signByCanvasService.insertSign(map.get("id"), map.get("dataUrl"));
+		String signKey = System.currentTimeMillis()/1000+ map.get("id");
+		log.debug("@@@@@@ signKey @@@@@@"+signKey);
+
+		signByCanvasService.insertSign(signKey, map.get("dataUrl"));
 		
 		JsonResModel jsonModel = new JsonResModel();
 		jsonModel.setData(map);
 
-		log.debug("############## END canvasInsert ############## ");
+		log.debug("############## END canvasInsert ##############");
 		return jsonModel;
 	}
 
 	@RequestMapping(value = "/jsonRequestBody")
 	@ResponseBody
 	public JsonResModel jsonRequestBody(@RequestBody Map<String,String> map) throws Exception {
-		log.debug("############## START jsonRequestBody ############## "+map);
+		log.debug("############## START jsonRequestBody ##############" + map);
 		
 		JsonResModel jsonModel = new JsonResModel();
 		
-		log.debug("############## END jsonRequestBody ############## ");
+		log.debug("############## END jsonRequestBody ##############");
 		return jsonModel;
 	}
 	
 	@RequestMapping(value = "/jsonRequestParam")
 	@ResponseBody
 	public JsonResModel jsonRequestParam(@RequestParam Map<String,String> map) throws Exception {
-		log.debug("############## START jsonRequestParam ############## "+map);
+		log.debug("############## START jsonRequestParam ##############"+map);
 		
 		JsonResModel jsonModel = new JsonResModel();
 		
-		log.debug("############## END jsonRequestParam ############## ");
+		log.debug("############## END jsonRequestParam ##############");
 		return jsonModel;
 	}
 	
 	@RequestMapping(value = "/jsonServletRequest")
 	@ResponseBody
 	public JsonResModel jsonServletRequest(HttpServletRequest request) throws Exception {
-		log.debug("############## START jsonServletRequest ############## ");
+		log.debug("############## START jsonServletRequest ##############");
         Enumeration<?> en = request.getParameterNames();
         while(en.hasMoreElements()) {
         	String paramKey = (String) en.nextElement();            	
@@ -106,7 +113,7 @@ public class SignByCanvasController {
 		
 		JsonResModel jsonModel = new JsonResModel();
 		
-		log.debug("############## END jsonServletRequest ############## ");
+		log.debug("############## END jsonServletRequest ##############");
 		return jsonModel;
 	}	
 }

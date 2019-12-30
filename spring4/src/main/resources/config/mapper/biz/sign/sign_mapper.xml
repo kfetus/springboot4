@@ -3,7 +3,7 @@
 <!-- 
 CREATE TABLE SIGNDATA_SAVE (
 	SIGN_KEY VARCHAR2(20) NOT NULL, 
-	SCHEDULE CLOB, 
+	SIGN_DATA CLOB, 
 	REG_ID VARCHAR2(20) DEFAULT 'SYSTEM', 
 	REG_DT DATE DEFAULT SYSDATE, 
 	CNG_DT DATE
@@ -15,7 +15,7 @@ ALTER TABLE SIGNDATA_SAVE ADD CONSTRAINT PK_SIGNDATA_SAVE PRIMARY KEY (SIGN_KEY)
 <mapper namespace="base.biz.sign.SignByCanvasMapper">
     <select id="selectSignList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT SIGN_KEY
-			   , SCHEDULE
+			   , SIGN_DATA
 			   , REG_ID
 			   , REG_DT
 			   , CNG_DT
@@ -25,7 +25,7 @@ ALTER TABLE SIGNDATA_SAVE ADD CONSTRAINT PK_SIGNDATA_SAVE PRIMARY KEY (SIGN_KEY)
 	<insert id="insertSign" parameterType="String">
 		INSERT INTO SIGNDATA_SAVE (
 				SIGN_KEY
-				, SCHEDULE
+				, SIGN_DATA
 				, REG_ID
 				, REG_DT
 				, CNG_DT
