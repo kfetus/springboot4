@@ -39,5 +39,12 @@ ALTER TABLE SIGNDATA_SAVE ADD CONSTRAINT PK_SIGNDATA_SAVE PRIMARY KEY (SIGN_KEY)
 			)
 	</insert>    
 
+	<update id="updateSign">
+		UPDATE SIGNDATA_SAVE
+		SET    SIGN_DATA = NVL(#{signData:VARCHAR}, EMPTY_CLOB()),
+			   REG_ID = 'TEST',
+		       CNG_DT   = SYSDATE
+		WHERE  SIGN_KEY = '1222541'
+	</update>
 
 </mapper>

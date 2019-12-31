@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service("myScheduleService")
-public class MyScheduleServiceImpl {
+public class MyScheduleService {
 
 	@Resource(name="myScheduleMapper")
 	private MyScheduleMapper myScheduleMapper;

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import base.biz.schedule.impl.MyScheduleServiceImpl;
+import base.biz.schedule.impl.MyScheduleService;
 
 @RequestMapping(value = "/schedule")
 @Controller
@@ -24,7 +24,7 @@ public class MyScheduleController {
 	protected Logger log = LogManager.getLogger(this.getClass());
 	
 	@Resource(name="myScheduleService")
-	private MyScheduleServiceImpl myScheduleService;
+	private MyScheduleService myScheduleService;
 	
 	@RequestMapping(value = "/scheduleList")
 	public ModelAndView scheduleList(@RequestParam Map<String,Object> map) throws Exception {

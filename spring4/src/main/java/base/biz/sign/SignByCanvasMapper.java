@@ -13,4 +13,6 @@ public interface SignByCanvasMapper {
 	public List<HashMap<String, Object>> selectSignList(HashMap<String, String> map) throws Exception;
 	
 	public void insertSign(@Param("signKey") String signKey, @Param("signData") String signData) throws Exception;
+	
+	public void updateSign(@Param("signData") String signData) throws Exception;
 }

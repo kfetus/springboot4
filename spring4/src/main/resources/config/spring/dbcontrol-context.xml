@@ -6,7 +6,7 @@
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
@@ -25,35 +25,41 @@
 		<constructor-arg ref="dataSource_origin" />
 	</bean>
 
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="configLocation" value="classpath:/config/spring/mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath:/config/mapper/**/*_mapper.xml" />
     </bean>
 
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSession"/>
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
     	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 	    <property name="basePackage" value="base.biz" />
-	    <property name="sqlSessionFactoryBeanName" value="sqlSession" />
+	    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	    <property name="annotationClass" value="base.comm.dbio.ProjectMapper"></property>
 	</bean>
 
-   	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"/>
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<constructor-arg ref="dataSource" />
 	</bean>
 
-	<tx:advice id="txAdvice" transaction-manager="txManager">
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
+
+
+
+	<!-- tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
 			<tx:method name="*" rollback-for="Exception"/>
 		</tx:attributes>
 	</tx:advice>
 
 	<aop:config>
-		<aop:pointcut id="requiredTx" expression="execution(* base.biz..*Impl.*(..))"/>
+		<aop:pointcut id="requiredTx" expression="execution(* base.biz..*Service.*(..))"/>
+		<aop:pointcut id="requiredTx" expression="within(org.springframework.stereotype.Service)"/>
+		<aop:pointcut id="requiredTx" expression="bean(*Service)"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx" />
-	</aop:config>
+	</aop:config-->
     
 </beans>
