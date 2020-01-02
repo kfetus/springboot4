@@ -7,6 +7,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+	<properties>
+		<org.springframework-version>4.3.24.RELEASE</org.springframework-version>
+	</properties>
+
 	<repositories>
 	  <repository>
 	   <id>oracle</id>
@@ -24,7 +28,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.24.RELEASE</version>
+			<version>${org.springframework-version}</version>
 			<!-- exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -43,7 +47,11 @@
 			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
 			<version>1.16</version>
 		</dependency>
-
+	<dependency>
+		<groupId>org.apache.logging.log4j</groupId>
+		<artifactId>log4j-slf4j-impl</artifactId>
+		<version>2.11.1</version>
+	</dependency>
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -72,7 +80,7 @@
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
-		    <version>4.3.24.RELEASE</version>
+		    <version>${org.springframework-version}</version>
 		</dependency>
 		
 		<dependency>
