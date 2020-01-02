@@ -69,7 +69,9 @@ public class SignByCanvasController {
 		
 		String signKey = System.currentTimeMillis()/1000+ map.get("id");
 		log.debug("@@@@@@ signKey @@@@@@"+signKey);
-
+		log.debug("@@@@@@ signByCanvasService.getClass.getCanonicalName()="+signByCanvasService.getClass().getCanonicalName());
+		
+		
 		signByCanvasService.insertSign(signKey, map.get("dataUrl"));
 		
 		JsonResModel jsonModel = new JsonResModel();

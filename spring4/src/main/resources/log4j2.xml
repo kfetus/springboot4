@@ -9,13 +9,18 @@
 		</File>
 	</Appenders>
 
+
 	<Loggers>
 
-		<Logger name="org.apache.commons" level="DEBUG" additivity="false">
+		<Logger name="org.apache.commons" level="INFO" additivity="false">
 			<appender-ref ref="Console" />
 		</Logger>
 
 		<Logger name="org.springframework" level="DEBUG" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+		
+		<Logger name="org.apache.ibatis" level="DEBUG" additivity="false">
 			<AppenderRef ref="Console" />
 		</Logger>
 

@@ -14,6 +14,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @Transactional
 @Service("signByCanvasService")
@@ -37,8 +38,11 @@ public class SignByCanvasService {
 	public void insertSign(String pk, String signData) throws Exception {
 //		TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
 //		try {
+		log.info("currentTransactionName : {}", TransactionSynchronizationManager.getCurrentTransactionName());
 		signByCanvasMapper.insertSign(pk, signData);
+		log.info("currentTransactionName : {}", TransactionSynchronizationManager.getCurrentTransactionName());
 		signByCanvasMapper.updateSign(signData);
+		log.info("currentTransactionName : {}", TransactionSynchronizationManager.getCurrentTransactionName());
 		signByCanvasMapper.insertSign(pk, signData);
 //		} catch(Exception e) {
 //			e.printStackTrace();
