@@ -10,8 +10,6 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-
-
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<constructor-arg ref="dataSource" />
 	</bean>
@@ -48,7 +46,7 @@
 	    < property name="annotationClass" value="base.comm.dbio.ProjectMapper"></property-->
 	</bean>
 
-
+	<!-- Interface방식의 Service단에서 Impl클래스에 AOP로 트랜잭션을 Inject 하기 위한 선언 -->
 	<!-- tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
 			<tx:method name="*" rollback-for="Exception"/>
