@@ -5,7 +5,7 @@ import java.util.Map;
 
 import base.comm.dbio.ProjectMapper;
 
-@ProjectMapper("myScheduleMapper")
+//@ProjectMapper("myScheduleMapper")
 public interface MyScheduleMapper {
 
 	public List<Map<String, Object>> selectScheduleList(Map<String, Object> map) throws Exception;

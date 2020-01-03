@@ -34,7 +34,7 @@ public class SignByCanvasService {
 		return signByCanvasMapper.selectSignList(map);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor=Exception.class)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor=Exception.class)
 	public void insertSign(String pk, String signData) throws Exception {
 //		TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
 //		try {

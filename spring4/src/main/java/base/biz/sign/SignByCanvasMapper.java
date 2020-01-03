@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import base.comm.dbio.ProjectMapper;
 
-@ProjectMapper("signByCanvasMapper")
+//@ProjectMapper("signByCanvasMapper")
 public interface SignByCanvasMapper {
 
 	public List<HashMap<String, Object>> selectSignList(HashMap<String, String> map) throws Exception;
