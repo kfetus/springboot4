@@ -17,11 +17,13 @@ public class SystemPropertyService {
 
 	private Logger log = LogManager.getLogger(this.getClass());
 	
+	private final String propertyType = "system";
+	
 	@Autowired
 	private Properties properties;
 	
 	public String getTest() {
 		log.debug("$$$$$$ SystemPorpertyService.getTest $$$$$$");
-		return properties.getProperty("system.test");
+		return properties.getProperty(propertyType+".test");
 	}
 }

@@ -16,11 +16,13 @@ public class MessagePropertyService {
 
 	private Logger log = LogManager.getLogger(this.getClass());
 	
+	private final String propertyType = "message";
+	
 	@Autowired
 	private Properties properties;
 	
 	public String getTest() {
 		log.debug("$$$$$$ MessagePropertyService.getTest $$$$$$");
-		return properties.getProperty("message.test");
+		return properties.getProperty(propertyType+".test");
 	}
 }
