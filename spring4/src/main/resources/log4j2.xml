@@ -16,11 +16,11 @@
 			<appender-ref ref="Console" />
 		</Logger>
 
-		<Logger name="org.springframework" level="DEBUG" additivity="false">
+		<Logger name="org.springframework" level="INFO" additivity="false">
 			<AppenderRef ref="Console" />
 		</Logger>
 		
-		<Logger name="org.apache.ibatis" level="DEBUG" additivity="false">
+		<Logger name="org.apache.ibatis" level="INFO" additivity="false">
 			<AppenderRef ref="Console" />
 		</Logger>
 

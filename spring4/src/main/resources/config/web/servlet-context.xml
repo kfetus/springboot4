@@ -12,7 +12,9 @@
 	<!-- 정적 파일 처리용 -->
 	<!-- Enables the Spring MVC @Controller programming model--> 
 	<annotation-driven />
-	<!-- default-servlet-handler /-->
+	<!-- 이 부분은 context path를 / 로 선언해서 js,css,html등 모든 정적 리소스를 was가 처리하게 되는 로컬 개발환경일 경우 선언하면 기본 servlet이 해당 리소스를 서비스한다.
+	      <resources mapping="/js/**" location="/js/" /> 이 선언으로 대체가 가능하다.
+	< default-servlet-handler /-->
 
 	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
