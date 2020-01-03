@@ -44,7 +44,8 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 	    <property name="basePackage" value="base.biz" />
 	    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-	    <!-- property name="annotationClass" value="base.comm.dbio.ProjectMapper"></property-->
+	    <!-- 다중 DataSource를 사용하면 각각의 annotation Class를 만들어서 이 프로퍼티로 매핑하면 위에 선언한 sqlSessionFactory별로 scan이 된다.
+	    < property name="annotationClass" value="base.comm.dbio.ProjectMapper"></property-->
 	</bean>
 
 
