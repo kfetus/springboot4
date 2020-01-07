@@ -32,6 +32,14 @@ public class BoardService {
 		return boardMapper.selectBoardList(map);
 	}
 	
+	/**
+	 * 게시판 데이터 등록
+	 * @param map
+	 * @throws Exception
+	 */
+	public void insertBoard(HashMap<String, String> map) throws Exception {
+		boardMapper.insertBoard(map);
+	}
 	
 	public List<HashMap<String, String>> selectBoardSearch(String bKey, String title) throws Exception{
 		

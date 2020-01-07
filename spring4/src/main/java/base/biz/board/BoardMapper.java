@@ -15,4 +15,6 @@ public interface BoardMapper {
 	public List<HashMap<String, String>> selectBoardList(HashMap<String, String> map) throws Exception;
 	
 	public List<HashMap<String, String>>  selectBoardSearch(@Param("bKey") String bKey, @Param("title") String title) throws Exception;
+	
+	public void insertBoard(HashMap<String, String> map) throws Exception;
 }

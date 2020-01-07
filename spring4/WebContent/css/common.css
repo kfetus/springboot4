@@ -56,3 +56,18 @@ table.commtable tfoot .links a{
   padding: 2px 8px;
   border-radius: 5px;
 }
+
+.btn {
+  border: none;
+  background-color: inherit;
+  padding: 1px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  color: green;
+}
+
+.btn:hover {
+  background-color: #4CAF50;
+  color: white;
+}

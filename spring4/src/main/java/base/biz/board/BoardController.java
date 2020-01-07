@@ -44,16 +44,27 @@ public class BoardController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/boardInsert")
+	@ResponseBody
+	public JsonResModel boardInsert(@RequestBody HashMap<String,String> map) throws Exception {
+		log.debug("############## START boardInsert ##############"+map);
+		
+		boardService.insertBoard(map);
+		
+		JsonResModel jsonModel = new JsonResModel();
+		jsonModel.setMsg("등록되었습니다.");
+
+		log.debug("############## END boardInsert ##############");
+		return jsonModel;
+	}
+	
 	
 	@RequestMapping(value = "/boardSearch")
 	@ResponseBody
 	public JsonResModel boardSearch(@RequestBody HashMap<String,String> map) throws Exception {
 		log.debug("############## START boardSearch ##############"+map);
 		
-		String bKey = map.get("bKey");
-		String title = map.get("title");
-		
-		List<HashMap<String, String>> searchList = boardService.selectBoardSearch(bKey, title);
+		List<HashMap<String, String>> searchList = boardService.selectBoardList(map);
 		
 		HashMap<String,Object> returnMap = new HashMap<String,Object>();
 		JsonResModel jsonModel = new JsonResModel();

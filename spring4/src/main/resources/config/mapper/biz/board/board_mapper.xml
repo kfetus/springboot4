@@ -43,30 +43,35 @@ COMMENT ON COLUMN MAIN_BOARD.CNG_DT IS '변경일';
 				, CNG_DT
 		  FROM MAIN_BOARD
 		<where>
-			<if test="bKey != null and bKey != '' ">AND SEQ = #{bKey}</if>
+			<if test="seq != null and seq != '' ">AND SEQ = #{seq}</if>
+			<if test="title != null and title != '' ">AND TITLE = #{title}</if>
 		</where>
 		ORDER BY SEQ
     </select>
     
-	<!-- insert id="insertSchedule" parameterType="java.util.HashMap">
-		INSERT INTO MY_SCHEDULE (
-			   YYYYMMDD, 
-			   HH, 
-			   SCHEDULE, 
-			   REG_ID, 
-			   REG_DT, 
-			   CNG_DT) 
-		VALUES ( 
-				 #{YYYYMMDD},
-				 #{HH},
-				 #{SCHEDULE},
-				 #{REG_ID},
-				 SYSDATE,
-				 SYSDATE 
-				)
+	<insert id="insertBoard" parameterType="java.util.HashMap">
+		INSERT /* BoardMapper.selectBoardList 게시판 조회 */
+		INTO NARU.MAIN_BOARD(
+			SEQ
+			, CATEGORY
+			, TITLE
+			, BODY_TEXT
+			, REG_ID
+			, REG_DT
+			, CNG_DT
+			)
+		VALUES(
+			BOARD_SEQ.NEXTVAL
+			, #{category}
+			, #{title}
+			, #{bodyText}
+			, #{regId}
+			, SYSDATE
+			, SYSDATE
+			)
 	</insert>    
 
-	<select id="selectScheduleView" parameterType="String" resultType="java.util.HashMap">
+	<!-- select id="selectScheduleView" parameterType="String" resultType="java.util.HashMap">
 		SELECT YYYYMMDD
 		       , HH
 		       , SCHEDULE
