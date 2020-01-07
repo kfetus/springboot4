@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+CREATE SEQUENCE BOARD_SEQ
+INCREMENT BY 1 
+START WITH 1 
+MINVALUE 1 
+MAXVALUE 99999999 
+NOCYCLE 
+NOCACHE; 
+
+CREATE TABLE MAIN_BOARD (
+	SEQ NUMBER NOT NULL,
+	CATEGORY VARCHAR2(20) NOT NULL, 
+	TITLE VARCHAR2(200) NOT NULL,
+	BODY_TEXT VARCHAR2(4000) ,
+	REG_ID VARCHAR2(20) DEFAULT 'SYSTEM', 
+	REG_DT DATE DEFAULT SYSDATE, 
+	CNG_DT DATE
+);
+
+ALTER TABLE MAIN_BOARD ADD CONSTRAINT PK_MAIN_BOARD PRIMARY KEY (SEQ);
+
+COMMENT ON TABLE MAIN_BOARD IS '기본 칸반 게시판' ;
+COMMENT ON COLUMN MAIN_BOARD.SEQ IS 'PK 순번';
+COMMENT ON COLUMN MAIN_BOARD.CATEGORY IS '게시물 카테고리';
+COMMENT ON COLUMN MAIN_BOARD.TITLE IS '제목';
+COMMENT ON COLUMN MAIN_BOARD.BODY_TEXT IS '본문';
+COMMENT ON COLUMN MAIN_BOARD.REG_ID IS '등록자ID';
+COMMENT ON COLUMN MAIN_BOARD.REG_DT IS '등록일';
+COMMENT ON COLUMN MAIN_BOARD.CNG_DT IS '변경일';
+
+ -->
+<mapper namespace="base.biz.board.BoardMapper">
+    <select id="selectBoardList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT /* BoardMapper.selectBoardList 게시판 조회 */
+				SEQ
+				, CATEGORY
+				, TITLE
+				, BODY_TEXT
+				, REG_ID
+				, REG_DT
+				, CNG_DT
+		  FROM MAIN_BOARD
+		<where>
+			<if test="bKey != null and bKey != '' ">AND SEQ = #{bKey}</if>
+		</where>
+		ORDER BY SEQ
+    </select>
+    
+	<!-- insert id="insertSchedule" parameterType="java.util.HashMap">
+		INSERT INTO MY_SCHEDULE (
+			   YYYYMMDD, 
+			   HH, 
+			   SCHEDULE, 
+			   REG_ID, 
+			   REG_DT, 
+			   CNG_DT) 
+		VALUES ( 
+				 #{YYYYMMDD},
+				 #{HH},
+				 #{SCHEDULE},
+				 #{REG_ID},
+				 SYSDATE,
+				 SYSDATE 
+				)
+	</insert>    
+
+	<select id="selectScheduleView" parameterType="String" resultType="java.util.HashMap">
+		SELECT YYYYMMDD
+		       , HH
+		       , SCHEDULE
+		       , REG_ID
+		  FROM MY_SCHEDULE
+		 WHERE YYYYMMDD = #{pk}
+	</select>
+
+	<update id="updateSchedule">
+		UPDATE MY_SCHEDULE
+		SET    YYYYMMDD = #{YYYYMMDD},
+		       HH       = #{HH},
+		       SCHEDULE = #{SCHEDULE},
+		       REG_ID   = #{REG_ID},
+		       CNG_DT   = SYSDATE
+		WHERE  YYYYMMDD = #{YYYYMMDD}
+		AND    HH       = #{HH}
+	</update>
+	
+	<delete id="deleteSchedule">
+		DELETE FROM MY_SCHEDULE
+		WHERE  YYYYMMDD = #{YYYYMMDD}
+		AND    HH       = #{HH}	
+	</delete-->
+</mapper>

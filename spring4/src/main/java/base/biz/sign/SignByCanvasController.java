@@ -64,15 +64,15 @@ public class SignByCanvasController {
 	
 	@RequestMapping(value = "/canvasInsert")
 	@ResponseBody
-	public JsonResModel canvasInsert(@RequestBody HashMap<String,String> map) throws Exception {
+	public JsonResModel canvasInsert(@RequestBody HashMap<String,Object> map) throws Exception {
 		log.debug("############## START canvasInsert ##############"+map);
 		
-		String signKey = System.currentTimeMillis()/1000+ map.get("id");
+		String signKey = System.currentTimeMillis()/1000+ (String)map.get("id");
 		log.debug("@@@@@@ signKey @@@@@@"+signKey);
 		log.debug("@@@@@@ signByCanvasService.getClass.getCanonicalName()="+signByCanvasService.getClass().getCanonicalName());
 		
 		
-		signByCanvasService.insertSign(signKey, map.get("dataUrl"));
+		signByCanvasService.insertSign(signKey, (String)map.get("dataUrl"));
 		
 		JsonResModel jsonModel = new JsonResModel();
 		jsonModel.setData(map);
