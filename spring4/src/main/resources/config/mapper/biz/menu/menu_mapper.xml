@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+CREATE TABLE MENU (
+	URL VARCHAR2(100) NOT NULL,
+	MUNU_NAME VARCHAR2(200) NOT NULL,
+	MENU_TYPE VARCHAR2(2) NOT NULL,
+	SYS_GROUP VARCHAR2(2) NOT NULL,
+	MENU_LEVEL VARCHAR2(2) NOT NULL,
+	ORDER_NUM VARCHAR2(2) NOT NULL,
+	USE_YN CHAR(1) NOT NULL DEFAULT 'Y',
+	TARGET_SYS_GROUP VARCHAR2(2) NOT NULL,
+	REG_ID VARCHAR2(20) DEFAULT 'SYSTEM', 
+	REG_DT DATE DEFAULT SYSDATE, 
+	CNG_DT DATE
+);
+
+
+ALTER TABLE MENU ADD CONSTRAINT PK_MENU PRIMARY KEY (URL);
+
+COMMENT ON TABLE MENU IS '메뉴' ;
+COMMENT ON COLUMN MENU.URL IS 'URL';
+COMMENT ON COLUMN MENU.MUNU_NAME IS '메뉴명';
+COMMENT ON COLUMN MENU.MENU_TYPE IS '메뉴 타입 01:NEW 02:추천';
+COMMENT ON COLUMN MENU.SYS_GROUP IS '시스템 그룹 01:WEB 02:APP';
+COMMENT ON COLUMN MENU.MENU_LEVEL IS '레벨';
+COMMENT ON COLUMN MENU.ORDER_NUM IS '정렬순서';
+COMMENT ON COLUMN MENU.USE_YN IS '사용여부';
+COMMENT ON COLUMN MENU.TARGET_SYS_GROUP IS '대상 시스템 그룹';
+COMMENT ON COLUMN MENU.REG_ID IS '등록자ID';
+COMMENT ON COLUMN MENU.REG_DT IS '등록일';
+COMMENT ON COLUMN MENU.CNG_DT IS '변경일';
+
+ -->
+<mapper namespace="base.biz.board.BoardMapper">
+    <select id="selectBoardList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT /* BoardMapper.selectBoardList 게시판 조회 */
+				SEQ
+				, CATEGORY
+				, TITLE
+				, BODY_TEXT
+				, REG_ID
+				, REG_DT
+				, CNG_DT
+		  FROM MAIN_BOARD
+		<where>
+			<if test="seq != null and seq != '' ">AND SEQ = #{seq}</if>
+			<if test="title != null and title != '' ">AND TITLE = #{title}</if>
+		</where>
+		ORDER BY SEQ
+    </select>
+    
+	<insert id="insertBoard" parameterType="java.util.HashMap">
+		INSERT /* BoardMapper.selectBoardList 게시판 조회 */
+		INTO NARU.MAIN_BOARD(
+			SEQ
+			, CATEGORY
+			, TITLE
+			, BODY_TEXT
+			, REG_ID
+			, REG_DT
+			, CNG_DT
+			)
+		VALUES(
+			BOARD_SEQ.NEXTVAL
+			, #{category}
+			, #{title}
+			, #{bodyText}
+			, #{regId}
+			, SYSDATE
+			, SYSDATE
+			)
+	</insert>    
+
+	<!-- select id="selectScheduleView" parameterType="String" resultType="java.util.HashMap">
+		SELECT YYYYMMDD
+		       , HH
+		       , SCHEDULE
+		       , REG_ID
+		  FROM MY_SCHEDULE
+		 WHERE YYYYMMDD = #{pk}
+	</select>
+
+	<update id="updateSchedule">
+		UPDATE MY_SCHEDULE
+		SET    YYYYMMDD = #{YYYYMMDD},
+		       HH       = #{HH},
+		       SCHEDULE = #{SCHEDULE},
+		       REG_ID   = #{REG_ID},
+		       CNG_DT   = SYSDATE
+		WHERE  YYYYMMDD = #{YYYYMMDD}
+		AND    HH       = #{HH}
+	</update>
+	
+	<delete id="deleteSchedule">
+		DELETE FROM MY_SCHEDULE
+		WHERE  YYYYMMDD = #{YYYYMMDD}
+		AND    HH       = #{HH}	
+	</delete-->
+</mapper>
