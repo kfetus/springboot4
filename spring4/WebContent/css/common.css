@@ -2,7 +2,7 @@
 table.commtable {
   border: 1px solid #1C6EA4;
   background-color: #EEEEEE;
-  width: 100%;
+  width: 80%;
   text-align: left;
   border-collapse: collapse;
 }
@@ -58,16 +58,19 @@ table.commtable tfoot .links a{
 }
 
 .btn {
-  border: none;
-  background-color: inherit;
-  padding: 1px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  display: inline-block;
-  color: green;
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:24px;
+  font-size:16px;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
 }
 
 .btn:hover {
-  background-color: #4CAF50;
-  color: white;
+background:#fff;
+  color:#1AAB8A;
 }

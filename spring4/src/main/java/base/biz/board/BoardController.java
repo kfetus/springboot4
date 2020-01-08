@@ -40,7 +40,7 @@ public class BoardController {
 		mv.addObject("pageTitle", "게시판 목록" );
 		
 		mv.setViewName("biz/board/boardList.tiles");
-		log.debug("############## END boardList ##############");
+		log.debug("############## END boardList ##############"+list);
 		return mv;
 	}
 
