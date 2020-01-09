@@ -38,13 +38,15 @@ COMMENT ON COLUMN MENU.CNG_DT IS '변경일';
     <select id="selectMenuList" resultType="java.util.HashMap">
 		SELECT /* MenuMapper.selectMenuList 메뉴 조회 */
 				LEVEL
-				,URL
-				,MENU_NAME 
+				, URL
+				, MENU_NAME
+				, ORDER_NUM 
 		  FROM MENU
 		 WHERE USE_YN = 'Y' 
 		   AND TARGET_SYS_GROUP = 'APP'
 		 START WITH PARENT_URL = 'R'
 		CONNECT BY PRIOR URL = PARENT_URL
+		ORDER SIBLINGS BY ORDER_NUM
     </select>
 
 </mapper>
