@@ -3,28 +3,28 @@
 <!-- 
 CREATE TABLE MENU (
 	URL VARCHAR2(100) NOT NULL,
+	SYS_GROUP VARCHAR2(3) NOT NULL,
 	PARENT_URL VARCHAR2(100) NOT NULL,
-	MUNU_NAME VARCHAR2(200) NOT NULL,
+	MENU_NAME VARCHAR2(200) NOT NULL,
 	MENU_TYPE VARCHAR2(2) NOT NULL,
-	SYS_GROUP VARCHAR2(2) NOT NULL,
 	MENU_LEVEL VARCHAR2(2) NOT NULL,
 	ORDER_NUM VARCHAR2(2) NOT NULL,
 	USE_YN CHAR(1) DEFAULT 'Y',
-	TARGET_SYS_GROUP VARCHAR2(2) NOT NULL,
+	TARGET_SYS_GROUP VARCHAR2(3) NOT NULL,
 	REG_ID VARCHAR2(20) DEFAULT 'SYSTEM', 
 	REG_DT DATE DEFAULT SYSDATE, 
 	CNG_DT DATE
 );
 
 
-ALTER TABLE MENU ADD CONSTRAINT PK_MENU PRIMARY KEY (URL);
+ALTER TABLE MENU ADD CONSTRAINT PK_MENU PRIMARY KEY (URL,SYS_GROUP);
 
 COMMENT ON TABLE MENU IS '메뉴' ;
 COMMENT ON COLUMN MENU.URL IS 'URL';
-COMMENT ON COLUMN MENU.PARENT_URL IS '부모 URL';
-COMMENT ON COLUMN MENU.MUNU_NAME IS '메뉴명';
+COMMENT ON COLUMN MENU.SYS_GROUP IS '시스템 그룹 WEB ,APP';
+COMMENT ON COLUMN MENU.PARENT_URL IS '부모 URL R:root';
+COMMENT ON COLUMN MENU.MENU_NAME IS '메뉴명';
 COMMENT ON COLUMN MENU.MENU_TYPE IS '메뉴 타입 01:NEW 02:추천 05:일반';
-COMMENT ON COLUMN MENU.SYS_GROUP IS '시스템 그룹 01:WEB 02:APP';
 COMMENT ON COLUMN MENU.MENU_LEVEL IS '레벨';
 COMMENT ON COLUMN MENU.ORDER_NUM IS '정렬순서';
 COMMENT ON COLUMN MENU.USE_YN IS '사용여부';
@@ -34,69 +34,16 @@ COMMENT ON COLUMN MENU.REG_DT IS '등록일';
 COMMENT ON COLUMN MENU.CNG_DT IS '변경일';
 
  -->
-<mapper namespace="base.biz.board.BoardMapper">
-    <select id="selectBoardList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT /* BoardMapper.selectBoardList 게시판 조회 */
-				SEQ
-				, CATEGORY
-				, TITLE
-				, BODY_TEXT
-				, REG_ID
-				, REG_DT
-				, CNG_DT
-		  FROM MAIN_BOARD
-		<where>
-			<if test="seq != null and seq != '' ">AND SEQ = #{seq}</if>
-			<if test="title != null and title != '' ">AND TITLE = #{title}</if>
-		</where>
-		ORDER BY SEQ
+<mapper namespace="base.biz.menu.MenuMapper">
+    <select id="selectMenuList" resultType="java.util.HashMap">
+		SELECT /* MenuMapper.selectMenuList 메뉴 조회 */
+				LEVEL
+				,URL
+				,MENU_NAME 
+		  FROM MENU
+		 WHERE TARGET_SYS_GROUP = 'APP'
+		 START WITH PARENT_URL = 'R'
+		CONNECT BY PRIOR URL = PARENT_URL
     </select>
-    
-	<insert id="insertBoard" parameterType="java.util.HashMap">
-		INSERT /* BoardMapper.selectBoardList 게시판 조회 */
-		INTO NARU.MAIN_BOARD(
-			SEQ
-			, CATEGORY
-			, TITLE
-			, BODY_TEXT
-			, REG_ID
-			, REG_DT
-			, CNG_DT
-			)
-		VALUES(
-			BOARD_SEQ.NEXTVAL
-			, #{category}
-			, #{title}
-			, #{bodyText}
-			, #{regId}
-			, SYSDATE
-			, SYSDATE
-			)
-	</insert>    
 
-	<!-- select id="selectScheduleView" parameterType="String" resultType="java.util.HashMap">
-		SELECT YYYYMMDD
-		       , HH
-		       , SCHEDULE
-		       , REG_ID
-		  FROM MY_SCHEDULE
-		 WHERE YYYYMMDD = #{pk}
-	</select>
-
-	<update id="updateSchedule">
-		UPDATE MY_SCHEDULE
-		SET    YYYYMMDD = #{YYYYMMDD},
-		       HH       = #{HH},
-		       SCHEDULE = #{SCHEDULE},
-		       REG_ID   = #{REG_ID},
-		       CNG_DT   = SYSDATE
-		WHERE  YYYYMMDD = #{YYYYMMDD}
-		AND    HH       = #{HH}
-	</update>
-	
-	<delete id="deleteSchedule">
-		DELETE FROM MY_SCHEDULE
-		WHERE  YYYYMMDD = #{YYYYMMDD}
-		AND    HH       = #{HH}	
-	</delete-->
 </mapper>
