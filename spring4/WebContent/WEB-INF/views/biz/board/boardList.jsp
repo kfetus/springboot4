@@ -26,12 +26,12 @@
 	
 					<table class="commtable">
 						<colgroup>
-							<col width="10%" />
-							<col width="10%" />
-							<col width="10%" />
-							<col width="10%" />
+							<col width="15%" />
+							<col width="15%" />
 							<col width="*" />
-							<col width="10%" />
+							<col width="15%" />
+							<col width="15%" />
+							<col width="15%" />
 						</colgroup>
 						<thead>
 							<tr>
@@ -40,7 +40,7 @@
 								<th scope="col">제목</th>
 								<th scope="col">등록자ID</th>
 								<th scope="col">등록일</th>
-								<th scope="col"><button type="button" id="addBoardBtn" class="btn" style="font-size:14px;">추가</button></th>
+								<th scope="col"><button type="button" id="addBoardBtn" class="btn" style="font-size:12px;">추가</button></th>
 							</tr>
 						</thead>
 						<tbody id="boardlistBody">
@@ -53,7 +53,7 @@
 											<td>${row.TITLE }</td>
 											<td>${row.REG_ID }</td>
 											<td>${row.REG_DT }</td>
-											<td><a href="javascript:fnEditBoard('${row.SEQ }');">수정</a></td>
+											<td></td>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -98,13 +98,14 @@
 	    	if($("#noResult").length){
 	    		$("#noResult").remove();
 	    	}
-	    	var row = "<tr>"
+	    	
+	    	var row = "<tr id='append_"+$('#boardlistBody tr').length+"'>"
 		    		+ "<td>순번</td>"
 	    			+ "<td><input type='text' placeholder='카테고리'></td>"
 	    			+ "<td><input type='text' placeholder='제목'></td>"
 	    			+ "<td><input type='text' placeholder='등록자ID'></td>"
 	    			+ "<td>등록일</td>"
-	    			+ "<td><a href='javascript:fnEditBoard('${row.SEQ }');'>수정</a></td>"
+	    			+ "<td><a href='javascript:fnEditBoard(\"append_"+$('#boardlistBody tr').length+"\");'>등록</a></td>"
 	    			+ "</tr>";
     		$('#boardlistBody').append(row)
 	    });
@@ -113,13 +114,33 @@
 
 	
 	function fnDetailView(seq){
-		$("#searchForm").attr("action", "<c:url value='/board/boardSearch'/>");
-		$("#seq").val(seq);
-		$("#searchForm").submit();
+		alert(seq);
 	}
 	
-	function fnEditBoard(seq) {
-		alert(seq);
+	function fnEditBoard(trId) {
+		console.log(trId);
+		var trElement = $('#'+trId); 
+		
+		
+		
+ 		$.ajax({
+			url: "<c:url value='/board/boardInsert'/>"
+			, type: "POST"
+			, dataType: "json"
+			, async: true
+			, contentType: "application/json;charset=UTF-8;"
+			, data: JSON.stringify({ "category":trElement.children()[1].firstElementChild.value, 
+									 "title":trElement.children()[2].firstElementChild.value,
+									 "bodyText":'',
+									 "regId":trElement.children()[3].firstElementChild.value })
+			, success: function(data){
+				console.log(data);
+				alert(data);
+			}, error: function(){
+				alert('error');
+			}, complete: function(){
+			}
+		});
 	}
 	
 </script>

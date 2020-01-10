@@ -41,8 +41,4 @@ public class BoardService {
 		boardMapper.insertBoard(map);
 	}
 	
-	public List<HashMap<String, String>> selectBoardSearch(String bKey, String title) throws Exception{
-		
-		return boardMapper.selectBoardSearch(bKey, title);
-	}
 }
