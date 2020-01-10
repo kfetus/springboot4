@@ -6,20 +6,14 @@
 		<input type="hidden" id="seq" name="seq" value='' />
 		<section>
 			<div>
-				<ul>
-					<li>
-						<input id="title" name="title" value='<c:out value="${title}"></c:out>' type="TEXT" maxlength="8" /> 
-					</li>
-					<li>
-						<span> 
-							<button type="button" id="searchBtn" class="btn">검색</button>
-						</span>
-						<c:out value="${fn:length(list)}"></c:out> 건
-					</li>
-				</ul>
+				<input id="title" name="title" value='<c:out value="${reqMap.title}"></c:out>' type="TEXT" maxlength="8" /> 
+				<span> 
+					<button type="button" id="searchBtn" class="btn">검색</button>
+				</span>
+				<c:out value="${fn:length(list)}"></c:out> 건
 			</div>
 		</section>
-	
+		<div class="div_blank"></div>
 		<section>
 			<div>
 				<div>
@@ -48,12 +42,12 @@
 								<c:when test="${list != null and fn:length(list) > 0}">
 									<c:forEach items="${list }" var="row">
 										<tr>
-											<td><a href="javascript:fnDetailView('${row.SEQ }');">${row.SEQ }</a></td>
+											<td><a href="javascript:fn_DetailView('${row.SEQ }');">${row.SEQ }</a></td>
 											<td>${row.CATEGORY }</td>
 											<td>${row.TITLE }</td>
 											<td>${row.REG_ID }</td>
 											<td>${row.REG_DT }</td>
-											<td></td>
+											<td><a href="javascript:fn_DelBoard('${row.SEQ }');">삭제</a></td>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -76,22 +70,7 @@
 	    console.log( "ready!" );
 	    
 	    $("#searchBtn").on('click',function(){
-
-			$.ajax({
-				url: "<c:url value='/board/boardSearch'/>"
-				, type: "POST"
-				, dataType: "json"
-				, async: true
-				, contentType: "application/json;charset=UTF-8;"
-				, data: JSON.stringify({ "seq":$("#seq").val(), "title":$("#title").val() })
-				, success: function(data){
-					console.log(data);
-					alert(data);
-				}, error: function(){
-					alert('error');
-				}, complete: function(){
-				}
-			});
+	    	fn_searchList();
 	    });
 	    
 	    $("#addBoardBtn").on('click',function(){
@@ -105,29 +84,48 @@
 	    			+ "<td><input type='text' placeholder='제목'></td>"
 	    			+ "<td><input type='text' placeholder='등록자ID'></td>"
 	    			+ "<td>등록일</td>"
-	    			+ "<td><a href='javascript:fnEditBoard(\"append_"+$('#boardlistBody tr').length+"\");'>등록</a></td>"
+	    			+ "<td><a href='javascript:fn_EditBoard(\"append_"+$('#boardlistBody tr').length+"\");'>등록</a></td>"
 	    			+ "</tr>";
     		$('#boardlistBody').append(row)
 	    });
 	    
 	});
 
+	function fn_searchList(){
+		$("#searchForm").attr("action", "<c:url value='/board/boardList'/>");
+		$("#searchForm").submit();
+	}
 	
-	function fnDetailView(seq){
+	function fn_DelBoard(seq) {
+		$("#seq").val(seq);
+		$("#searchForm").attr("action", "<c:url value='/board/boardDelete'/>");
+		$("#searchForm").submit();
+	}
+	
+	function fn_DetailView(seq){
 		alert(seq);
 	}
 	
-	function fnEditBoard(trId) {
+	function callbackTest(data){
+		alert(data);
+		
+	}
+	
+	function fn_EditBoard(trId) {
 		console.log(trId);
 		var trElement = $('#'+trId); 
 		
+		jsonAjaxSync("<c:url value='/board/boardInsert'/>","POST",
+				JSON.stringify({ "category":trElement.children()[1].firstElementChild.value, "title":trElement.children()[2].firstElementChild.value,
+			 	"bodyText":'',"regId":trElement.children()[3].firstElementChild.value })
+			 	,callbackTest);
 		
-		
+/*		
  		$.ajax({
 			url: "<c:url value='/board/boardInsert'/>"
 			, type: "POST"
 			, dataType: "json"
-			, async: true
+			, async: false
 			, contentType: "application/json;charset=UTF-8;"
 			, data: JSON.stringify({ "category":trElement.children()[1].firstElementChild.value, 
 									 "title":trElement.children()[2].firstElementChild.value,
@@ -135,12 +133,14 @@
 									 "regId":trElement.children()[3].firstElementChild.value })
 			, success: function(data){
 				console.log(data);
-				alert(data);
+				alert('등록되었습니다');
 			}, error: function(){
 				alert('error');
 			}, complete: function(){
 			}
 		});
+*/		
+ 		fn_searchList();
 	}
 	
 </script>

@@ -40,5 +40,8 @@ public class BoardService {
 	public void insertBoard(HashMap<String, String> map) throws Exception {
 		boardMapper.insertBoard(map);
 	}
-	
+
+	public void deleteBoard(String seq) throws Exception {
+		boardMapper.deleteBoard(seq);
+	}
 }

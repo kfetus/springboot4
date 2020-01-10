@@ -10,7 +10,7 @@
 <title><c:out value="${pageTitle}"></c:out></title>
 <link type="text/css" rel="stylesheet" href="<c:url value='/css/common.css'/>" />
 <script src="<c:url value='/js/jquery-3.4.1.min.js'/>"></script>
-
+<script src="<c:url value='/js/site_entire.js'/>"></script>
 </head>
 
 <body>

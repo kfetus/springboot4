@@ -57,6 +57,8 @@ table.commtable tfoot .links a{
   border-radius: 5px;
 }
 
+.div_blank{height: 5px;}
+
 .btn {
   background:#1AAB8A;
   color:#fff;

@@ -36,6 +36,7 @@ public class BoardController {
 		List<HashMap<String, String>> list = boardService.selectBoardList(map);
 		
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("reqMap", map );
 		mv.addObject("list", list );
 		mv.addObject("pageTitle", "게시판 목록" );
 		
@@ -58,6 +59,17 @@ public class BoardController {
 		return jsonModel;
 	}
 	
+
+	@RequestMapping(value = "/boardDelete")
+	public String boardDelete(@RequestParam HashMap<String,String> map) throws Exception {
+		log.debug("############## START boardDelete ##############");
+		String seq = map.get("seq");
+		
+		boardService.deleteBoard(seq);
+		
+		log.debug("############## END boardDelete ##############");
+		return "redirect:/board/boardList";
+	}	
 	
 	@RequestMapping(value = "/boardSearch")
 	@ResponseBody
