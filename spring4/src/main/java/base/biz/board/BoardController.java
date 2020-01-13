@@ -71,19 +71,4 @@ public class BoardController {
 		return "redirect:/board/boardList";
 	}	
 	
-	@RequestMapping(value = "/boardSearch")
-	@ResponseBody
-	public JsonResModel boardSearch(@RequestBody HashMap<String,String> map) throws Exception {
-		log.debug("############## START boardSearch ##############"+map);
-		
-		List<HashMap<String, String>> searchList = boardService.selectBoardList(map);
-		
-		HashMap<String,Object> returnMap = new HashMap<String,Object>();
-		JsonResModel jsonModel = new JsonResModel();
-		returnMap.put("list", searchList);
-		jsonModel.setData(returnMap);
-
-		log.debug("############## END boardSearch ##############");
-		return jsonModel;
-	}
 }

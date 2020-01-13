@@ -41,6 +41,11 @@ public class BoardService {
 		boardMapper.insertBoard(map);
 	}
 
+	/**
+	 * 게시판 데이터 삭제
+	 * @param seq
+	 * @throws Exception
+	 */
 	public void deleteBoard(String seq) throws Exception {
 		boardMapper.deleteBoard(seq);
 	}
