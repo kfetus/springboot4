@@ -47,25 +47,25 @@ function jsonAjaxSync(url,type,jsonData,callback) {
 }
 
 /*** 브라우저 Storage 관련 */
-function setStorage(type,key,value){
+function gfn_setStorage(type,key,value){
 	var storage; 
 	storage = window[type];
 	storage.setItem(key,value);
 }
 
-function getStorage(type,key){
+function gfn_getStorage(type,key){
 	var storage; 
 	storage = window[type];
-	storage.getItem(key);
+	return storage.getItem(key);
 }
 
-function getStorage(type,key){
+function gfn_RemoveStorage(type,key){
 	var storage; 
 	storage = window[type];
-	return storage.removeItem(key);
+	storage.removeItem(key);
 }
 
-function getStorage(type){
+function gfn_ClearStorage(type){
 	var storage; 
 	storage = window[type];
 	storage.clear();

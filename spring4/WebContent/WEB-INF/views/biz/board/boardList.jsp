@@ -89,9 +89,15 @@
     		$('#boardlistBody').append(row)
 	    });
 	    
+	    gfn_setStorage('localStorage','temp1','111');
+	    gfn_setStorage('sessionStorage','temp1','222');
+	    
 	});
 
 	function fn_searchList(){
+		console.log( gfn_getStorage('localStorage','temp') );
+		console.log( gfn_getStorage('sessionStorage','temp') );
+
 		$("#searchForm").attr("action", "<c:url value='/board/boardList'/>");
 		$("#searchForm").submit();
 	}
