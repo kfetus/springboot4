@@ -28,7 +28,13 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
-	
+
+	/**
+	 * 게시판 조회
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/boardList")
 	public ModelAndView boardList(@RequestParam HashMap<String,String> map) throws Exception {
 		log.debug("############## START boardList ##############");
@@ -45,6 +51,12 @@ public class BoardController {
 		return mv;
 	}
 
+	/**
+	 * 게시판 등록. json 형식
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/boardInsert")
 	@ResponseBody
 	public JsonResModel boardInsert(@RequestBody HashMap<String,String> map) throws Exception {
@@ -59,7 +71,12 @@ public class BoardController {
 		return jsonModel;
 	}
 	
-
+	/**
+	 * 게시물 삭제
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/boardDelete")
 	public String boardDelete(@RequestParam HashMap<String,String> map) throws Exception {
 		log.debug("############## START boardDelete ##############");
@@ -69,6 +86,45 @@ public class BoardController {
 		
 		log.debug("############## END boardDelete ##############");
 		return "redirect:/board/boardList";
-	}	
+	}
+
+	/**
+	 * 게시물 상세 보기
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/boardView")
+	public ModelAndView boardView(@RequestParam HashMap<String,String> map) throws Exception {
+		log.debug("############## START boardView ##############");
+		String seq = map.get("seq");
+		
+		HashMap<String, String> detailData = boardService.selectBoardView(seq);
+		log.debug("############## 조회 결과 {}",detailData);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("detailData", detailData );
+		mv.addObject("pageTitle", "게시판 상세" );
+		
+		mv.setViewName("biz/board/boardView.tiles");
+		log.debug("############## END boardView ##############");
+		return mv;
+	}
+	
+	/**
+	 * 게시물 수정
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/boardUpdate")
+	public String boardUpdate(@RequestParam HashMap<String,String> map) throws Exception {
+		log.debug("############## START boardUpdate ##############");
+		
+		boardService.updateBoard(map);
+		
+		log.debug("############## END boardUpdate ##############");
+		return "redirect:/board/boardList";
+	}
 	
 }

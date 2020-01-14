@@ -103,7 +103,10 @@
 	}
 	
 	function fn_DetailView(seq){
-		alert(seq);
+		$("#seq").val(seq);
+		$("#searchForm").attr("action", "<c:url value='/board/boardView'/>");
+		$("#searchForm").submit();
+
 	}
 	
 	function callbackTest(data){

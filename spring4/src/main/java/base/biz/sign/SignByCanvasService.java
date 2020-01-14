@@ -7,13 +7,9 @@ import javax.annotation.Resource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @Transactional
@@ -38,12 +34,15 @@ public class SignByCanvasService {
 	public void insertSign(String pk, String signData) throws Exception {
 //		TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
 //		try {
+
 		log.info("currentTransactionName : {}", TransactionSynchronizationManager.getCurrentTransactionName());
 		signByCanvasMapper.insertSign(pk, signData);
-		log.info("currentTransactionName : {}", TransactionSynchronizationManager.getCurrentTransactionName());
+/**		log.info("currentTransactionName : {}", TransactionSynchronizationManager.getCurrentTransactionName());
 		signByCanvasMapper.updateSign(signData);
 		log.info("currentTransactionName : {}", TransactionSynchronizationManager.getCurrentTransactionName());
 		signByCanvasMapper.insertSign(pk, signData);
+*/
+		
 //		} catch(Exception e) {
 //			e.printStackTrace();
 //			transactionManager.rollback(status);

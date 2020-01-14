@@ -71,25 +71,27 @@ COMMENT ON COLUMN MAIN_BOARD.CNG_DT IS '변경일';
 			)
 	</insert>    
 
-	<!-- select id="selectScheduleView" parameterType="String" resultType="java.util.HashMap">
-		SELECT YYYYMMDD
-		       , HH
-		       , SCHEDULE
-		       , REG_ID
-		  FROM MY_SCHEDULE
-		 WHERE YYYYMMDD = #{pk}
+	<select id="selectBoardView" parameterType="String" resultType="java.util.HashMap">
+		SELECT /* BoardMapper.selectBoardView 게시판 상세 조회 */
+				SEQ
+				, CATEGORY
+				, TITLE
+				, BODY_TEXT
+				, REG_ID
+				, REG_DT
+				, CNG_DT
+		  FROM MAIN_BOARD
+		 WHERE SEQ = #{seq}
 	</select>
 
-	<update id="updateSchedule">
-		UPDATE MY_SCHEDULE
-		SET    YYYYMMDD = #{YYYYMMDD},
-		       HH       = #{HH},
-		       SCHEDULE = #{SCHEDULE},
-		       REG_ID   = #{REG_ID},
-		       CNG_DT   = SYSDATE
-		WHERE  YYYYMMDD = #{YYYYMMDD}
-		AND    HH       = #{HH}
-	</update-->
+	<update id="updateBoard">
+		UPDATE MAIN_BOARD
+		SET    CATEGORY  = #{category},
+		       TITLE     = #{title},
+		       BODY_TEXT = #{bodyText},
+		       CNG_DT    = SYSDATE
+		WHERE SEQ = #{seq}
+	</update>
 	
 	<delete id="deleteBoard">
 		DELETE FROM MAIN_BOARD

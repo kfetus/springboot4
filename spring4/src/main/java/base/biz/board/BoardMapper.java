@@ -17,4 +17,9 @@ public interface BoardMapper {
 	public void insertBoard(HashMap<String, String> map) throws Exception;
 	
 	public void deleteBoard(@Param("seq") String seq) throws Exception;
+	
+	public HashMap<String, String> selectBoardView(@Param("seq") String seq) throws Exception;
+	
+	public void updateBoard(HashMap<String, String> map) throws Exception;
+
 }

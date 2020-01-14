@@ -49,4 +49,24 @@ public class BoardService {
 	public void deleteBoard(String seq) throws Exception {
 		boardMapper.deleteBoard(seq);
 	}
+
+	/**
+	 * 게시판 상세 조회
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public HashMap<String, String> selectBoardView(String seq) throws Exception {
+		return boardMapper.selectBoardView(seq);
+	}
+
+	/**
+	 * 게시판 데이터 수정
+	 * @param map
+	 * @throws Exception
+	 */
+	public void updateBoard(HashMap<String, String> map) throws Exception {
+		boardMapper.updateBoard(map);
+	}
+
 }
