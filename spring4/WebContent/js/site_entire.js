@@ -45,3 +45,31 @@ function jsonAjaxSync(url,type,jsonData,callback) {
 		}
 	});
 }
+
+/*** 브라우저 Storage 관련 */
+function setStorage(type,key,value){
+	var storage; 
+	storage = window[type];
+	storage.setItem(key,value);
+}
+
+function getStorage(type,key){
+	var storage; 
+	storage = window[type];
+	storage.getItem(key);
+}
+
+function getStorage(type,key){
+	var storage; 
+	storage = window[type];
+	return storage.removeItem(key);
+}
+
+function getStorage(type){
+	var storage; 
+	storage = window[type];
+	storage.clear();
+}
+
+
+
