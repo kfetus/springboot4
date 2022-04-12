@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>환영합니다.</c:out></title>
+<title>환영합니다.</title>
 <style type="text/css">
 html, body { margin: 0; padding: 0; background-color: #f1f1f1; overflow-x: hidden; }
 div {display: block;}
