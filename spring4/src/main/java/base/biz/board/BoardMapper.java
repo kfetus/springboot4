@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 /**
  * 간단 게시판
  * @author ojh
- *
+ * 
  */
 public interface BoardMapper {
 
