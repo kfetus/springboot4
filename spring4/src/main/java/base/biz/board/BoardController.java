@@ -17,7 +17,7 @@ import base.comm.data.JsonResModel;
 
 /**
  * 간단 게시판
- * @author naru
+ * @author ojh
  *
  */
 @RequestMapping(value = "/board")

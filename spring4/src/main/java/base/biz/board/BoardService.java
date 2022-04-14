@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 간단 게시판
- * @author naru
+ * @author ojh
  *
  */
 @Service

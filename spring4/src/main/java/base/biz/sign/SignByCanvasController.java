@@ -22,7 +22,7 @@ import base.comm.property.SystemPropertyService;
 import base.comm.util.DateUtil;
 /**
  * 캔바스 사인 테스트
- * @author naru
+ * @author ojh
  *
  */
 @RequestMapping(value = "/sign")
